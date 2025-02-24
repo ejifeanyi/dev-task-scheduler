@@ -1,4 +1,3 @@
-```
 # Task Scheduler CLI
 
 A simple command-line task scheduler with email notifications.
@@ -57,4 +56,3 @@ No environment variables needed - all configuration is handled through the CLI.
 - date-fns: Date formatting
 - conf: Local configuration storage
 
----

@@ -2,57 +2,66 @@
 
 A simple command-line task scheduler with email notifications.
 
-### Installation
+## Installation
 
-```bash
-# Clone the repository
-git clone 
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```  
+2. Navigate to the project directory:
+   ```bash
+   cd task-scheduler
+   ```  
+3. Install dependencies:
+   ```bash
+   npm install
+   ```  
+4. Install the CLI globally:
+   ```bash
+   npm install -g .
+   ```  
 
-# Navigate to task scheduler directory
-cd task-scheduler
+## Features
 
-# Install dependencies
-npm install
+- Schedule tasks with descriptions and execution times.  
+- Receive email notifications for scheduled tasks.  
+- View all tasks and their statuses.  
+- Uses local storage—no database setup required.  
+- Simple and user-friendly command-line interface.  
 
-# Install globally
-npm install -g .
-```
+## Usage
 
-### Features
+1. **Configure email notifications**  
+   ```bash
+   task setup-email
+   ```  
 
-- Schedule tasks with descriptions and times
-- Email notifications for scheduled tasks
-- List all tasks and their status
-- Local storage - no database required
-- Simple command-line interface
+2. **Add a new task**  
+   ```bash
+   task add
+   ```  
 
-### Usage
+3. **List all tasks**  
+   ```bash
+   task list
+   ```  
 
-```bash
-# Configure email notifications
-task setup-email
+4. **Start the task monitor**  
+   ```bash
+   task start
+   ```  
 
-# Add a new task
-task add
+## Configuration
 
-# List all tasks
-task list
+No environment variables are required. All configurations are handled through the CLI.  
 
-# Start the task monitor
-task start
-```
+## Dependencies
 
-### Environment Variables
-
-No environment variables needed - all configuration is handled through the CLI.
-
-### Dependencies
-
-- commander: Command-line interface
-- node-cron: Task scheduling
-- nodemailer: Email notifications
-- chalk: Terminal styling
-- inquirer: Interactive prompts
-- date-fns: Date formatting
-- conf: Local configuration storage
-
+This project uses the following libraries:
+- **commander** – Command-line interface management.  
+- **node-cron** – Task scheduling.  
+- **nodemailer** – Email notifications.  
+- **chalk** – Terminal styling for better readability.  
+- **inquirer** – Interactive prompts for user input.  
+- **date-fns** – Date formatting utilities.  
+- **conf** – Local configuration storage.  

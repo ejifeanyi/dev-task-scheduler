@@ -1,0 +1,59 @@
+# Task Scheduler CLI
+
+A simple command-line task scheduler with email notifications.
+
+### Installation
+
+```bash
+# Clone the repository
+git clone 
+
+# Navigate to task scheduler directory
+cd task-scheduler
+
+# Install dependencies
+npm install
+
+# Install globally
+npm install -g .
+```
+
+### Features
+
+- Schedule tasks with descriptions and times
+- Email notifications for scheduled tasks
+- List all tasks and their status
+- Local storage - no database required
+- Simple command-line interface
+
+### Usage
+
+```bash
+# Configure email notifications
+task setup-email
+
+# Add a new task
+task add
+
+# List all tasks
+task list
+
+# Start the task monitor
+task start
+```
+
+### Environment Variables
+
+No environment variables needed - all configuration is handled through the CLI.
+
+### Dependencies
+
+- commander: Command-line interface
+- node-cron: Task scheduling
+- nodemailer: Email notifications
+- chalk: Terminal styling
+- inquirer: Interactive prompts
+- date-fns: Date formatting
+- conf: Local configuration storage
+
+---

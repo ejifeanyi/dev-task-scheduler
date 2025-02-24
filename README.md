@@ -8,7 +8,7 @@ Fork the project
 
 1. Clone the repository:
    ```bash
-   git clone [<repository-url>](https://github.com/YOUR-USERNAME/dev-task-scheduler)
+   git clone https://github.com/YOUR-USERNAME/dev-task-scheduler
    ```
 2. Navigate to the project directory:
    ```bash

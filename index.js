@@ -1,31 +1,26 @@
 #!/usr/bin/env node
-const { program } = require("commander");
-const inquirer = require("inquirer");
-const cron = require("node-cron");
-const nodemailer = require("nodemailer");
-const chalk = require("chalk");
-const Conf = require("conf");
-const { format } = require("date-fns");
+import { Command } from "commander";
+import inquirer from "inquirer";
+import cron from "node-cron";
+import nodemailer from "nodemailer";
+import chalk from "chalk";
+import Conf from "conf";
+import { format } from "date-fns";
+
+const program = new Command();
 
 // Config store
 const config = new Conf({
 	projectName: "dev-task-scheduler",
+	defaults: {
+		tasks: [],
+		email: null,
+	},
 });
 
-// Initialize tasks array in config if it doesn't exist
-if (!config.has("tasks")) {
-	config.set("tasks", []);
-}
-
 // Email configuration setup
-const setupEmail = async () => {
+async function setupEmail(email) {
 	const answers = await inquirer.prompt([
-		{
-			type: "input",
-			name: "email",
-			message: "Enter your email:",
-			validate: (input) => input.includes("@"),
-		},
 		{
 			type: "password",
 			name: "password",
@@ -34,9 +29,33 @@ const setupEmail = async () => {
 		},
 	]);
 
-	config.set("email", answers);
-	console.log(chalk.green("Email configuration saved!"));
-};
+	config.set("email", {
+		email: email,
+		password: answers.password,
+	});
+
+	// Test email configuration
+	try {
+		const transporter = nodemailer.createTransport({
+			service: "gmail",
+			auth: {
+				user: email,
+				pass: answers.password,
+			},
+		});
+
+		await transporter.verify();
+		console.log(
+			chalk.green("Email configuration tested and saved successfully!")
+		);
+	} catch (error) {
+		console.error(
+			chalk.red("Error verifying email configuration:"),
+			error.message
+		);
+		config.delete("email");
+	}
+}
 
 // Add task command
 program
@@ -100,7 +119,7 @@ program
 
 // Setup email command
 program
-	.command("setup-email")
+	.command("setup-email <email>")
 	.description("Setup email notifications")
 	.action(setupEmail);
 
@@ -148,7 +167,7 @@ program
 							chalk.green(`Notification sent for task: ${task.description}`)
 						);
 					} catch (error) {
-						console.error(chalk.red("Error sending email:", error));
+						console.error(chalk.red("Error sending email:", error.message));
 					}
 				}
 			});
